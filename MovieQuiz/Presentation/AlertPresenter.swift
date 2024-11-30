@@ -19,7 +19,7 @@ final class AlertPresenter {
         alert.addAction(action)
         return alert
     }
-     func shownewAlert(model:AlertModel) {
+    func shownewAlert(model:AlertModel) {
         let alert = newAlertModel(model: model)
         delegate?.present(alert, animated: true, completion: nil)
     }
