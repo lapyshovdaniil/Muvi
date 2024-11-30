@@ -117,6 +117,9 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="UYd-jx-F8B">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
@@ -124,7 +127,9 @@
                             <constraint firstItem="gc4-3y-gmz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="68H-Vg-78S"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tNu-Ov-VuM" secondAttribute="trailing" constant="20" id="9Mb-Qn-7fq"/>
                             <constraint firstItem="tNu-Ov-VuM" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="9zD-st-uGp"/>
+                            <constraint firstItem="UYd-jx-F8B" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GsS-cb-CcP"/>
                             <constraint firstItem="tNu-Ov-VuM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Hld-U7-y38"/>
+                            <constraint firstItem="UYd-jx-F8B" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lpx-u0-9tg"/>
                             <constraint firstItem="job-IM-ePH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="XyC-y9-Tus"/>
                             <constraint firstItem="tNu-Ov-VuM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="bgy-9M-EkV"/>
                         </constraints>
@@ -132,6 +137,7 @@
                     <connections>
                         <outlet property="NoButton" destination="gc4-3y-gmz" id="sQ7-G9-2MR"/>
                         <outlet property="YesButton" destination="UmW-8N-hoH" id="DLU-wg-Hja"/>
+                        <outlet property="activityIndicator" destination="UYd-jx-F8B" id="Pe4-pM-hzS"/>
                         <outlet property="counterLabel" destination="UCU-3k-wWn" id="K6a-WL-l5G"/>
                         <outlet property="imageView" destination="U0j-hd-obX" id="XIO-fZ-buI"/>
                         <outlet property="textLabel" destination="9mO-Rv-K12" id="FCW-VC-gfv"/>

@@ -6,7 +6,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     @IBOutlet  private weak var counterLabel: UILabel!
     @IBOutlet  private weak var textLabel: UILabel!
     @IBOutlet  private weak var imageView: UIImageView!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     private let questionsAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
@@ -15,22 +15,34 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private var alertPresenter : AlertPresenter?
     private var statisticService: StatisticServiceProtocol = StatisticService()
     
+    
+    private func showLoadingIndicator() {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    func didFailToLoadData(with error: Error) {
+        showNetworkError(message: error.localizedDescription)
+    }
+    func didLoadDataFromServer() {
+        activityIndicator.isHidden = true
+        questionFactory?.requestNextQuestion()
+    }
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        statisticService = StatisticService()
         imageView.layer.cornerRadius = 20
+        questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
+        statisticService = StatisticService()
+        showLoadingIndicator()
+        questionFactory?.loadData()
+        questionFactory?.requestNextQuestion()
         imageView.contentMode = .scaleAspectFill
-        let questionFactory = QuestionFactory() // 2
-        questionFactory.delegate = self         // 3
-        self.questionFactory = questionFactory  // 4
-        questionFactory.requestNextQuestion()
         self.alertPresenter = AlertPresenter()
         alertPresenter?.setDelegate(self)
     }
     // MARK: - QuestionFactoryDelegate
     internal func didReceiveNextQuestion(question: QuizQuestion?) {
-        
         guard let question = question else {
             return
         }
@@ -42,14 +54,13 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     }
     
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
-        let questionStep = QuizStepViewModel(
-            image: UIImage(named: model.image) ?? UIImage(),
+        return QuizStepViewModel(
+            image: UIImage(data: model.image) ?? UIImage(),
             question: model.text,
-            questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)"
-        )
-        return questionStep
+            questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
     }
-   private func showAnswerResult(isCorrect: Bool) {
+    
+    private func showAnswerResult(isCorrect: Bool) {
         if isCorrect {
             correntAnswers += 1
         }
@@ -65,7 +76,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             self.imageView.layer.borderColor = UIColor.clear.cgColor
         }
     }
-   private func showNextQuestionOrResults() {
+    private func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
             statisticService.store(correct: correntAnswers, total: questionsAmount)
             let text = "Ваш результат: \(correntAnswers)/\(statisticService.bestGame.total)\n" + " Количество сыгранных квизов: \(statisticService.gamesCount)\n" + "Рекорд: \(statisticService.bestGame.correct)/\(statisticService.bestGame.total) \(statisticService.bestGame.date.dateTimeString)\n" + "Средняя точность: \(String(format: "%.2f",statisticService.totalAccuracy))%"
@@ -100,4 +111,20 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         let givenAnswer = false
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
+    private func showNetworkError(message: String) {
+        
+        let model = AlertModel(title: "Ошибка",
+                               messege: message,
+                               buttonText: "Попробовать еще раз") { [weak self] in
+            guard let self = self else { return }
+            
+            self.currentQuestionIndex = 0
+            self.correntAnswers = 0
+            
+            self.questionFactory?.requestNextQuestion()
+        }
+        
+        alertPresenter?.shownewAlert(model: model)
+    }
 }
+
