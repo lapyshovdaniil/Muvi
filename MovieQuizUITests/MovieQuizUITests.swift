@@ -62,8 +62,8 @@ class MovieQuizUITests: XCTestCase {
         alert.buttons.firstMatch.tap()
         sleep(2)
         let indexLabel = app.staticTexts["Index"]
-           XCTAssertFalse(alert.exists)
-           XCTAssertTrue(indexLabel.label == "1/10")
+        XCTAssertFalse(alert.exists)
+        XCTAssertTrue(indexLabel.label == "1/10")
     }
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -71,18 +71,18 @@ class MovieQuizUITests: XCTestCase {
         app.launch()
         continueAfterFailure = false
     }
-
+    
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         app.terminate()
-         app = nil
-
+        app = nil
+        
     }
-
+    
     func testExample() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
+        
     }
 }
