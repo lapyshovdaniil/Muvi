@@ -39,6 +39,7 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="1/10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCU-3k-wWn" userLabel="Index Label">
                                                 <rect key="frame" x="338" y="0.0" width="36" height="23.5"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="Index"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <color key="textColor" name="YP White"/>
                                                 <nil key="highlightedColor"/>
@@ -47,7 +48,7 @@
                                     </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="U0j-hd-obX" userLabel="Preview Image">
                                         <rect key="frame" x="19.5" y="43.5" width="335" height="502.5"/>
-                                        <accessibility key="accessibilityConfiguration">
+                                        <accessibility key="accessibilityConfiguration" identifier="Poster">
                                             <bool key="isElement" value="YES"/>
                                         </accessibility>
                                         <constraints>
@@ -71,6 +72,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gc4-3y-gmz" userLabel="No Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="177" height="60"/>
                                                 <color key="backgroundColor" name="YP White"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="No"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="cex-kh-36s"/>
                                                 </constraints>
@@ -91,6 +93,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UmW-8N-hoH" userLabel="Yes Button">
                                                 <rect key="frame" x="197" y="0.0" width="177" height="60"/>
                                                 <color key="backgroundColor" name="YP White"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="Yes"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="Ew4-m1-0k4"/>
                                                 </constraints>
@@ -117,6 +120,9 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="UYd-jx-F8B">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
@@ -124,7 +130,9 @@
                             <constraint firstItem="gc4-3y-gmz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="68H-Vg-78S"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tNu-Ov-VuM" secondAttribute="trailing" constant="20" id="9Mb-Qn-7fq"/>
                             <constraint firstItem="tNu-Ov-VuM" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="9zD-st-uGp"/>
+                            <constraint firstItem="UYd-jx-F8B" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GsS-cb-CcP"/>
                             <constraint firstItem="tNu-Ov-VuM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Hld-U7-y38"/>
+                            <constraint firstItem="UYd-jx-F8B" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lpx-u0-9tg"/>
                             <constraint firstItem="job-IM-ePH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="XyC-y9-Tus"/>
                             <constraint firstItem="tNu-Ov-VuM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="bgy-9M-EkV"/>
                         </constraints>
@@ -132,6 +140,7 @@
                     <connections>
                         <outlet property="NoButton" destination="gc4-3y-gmz" id="sQ7-G9-2MR"/>
                         <outlet property="YesButton" destination="UmW-8N-hoH" id="DLU-wg-Hja"/>
+                        <outlet property="activityIndicator" destination="UYd-jx-F8B" id="Pe4-pM-hzS"/>
                         <outlet property="counterLabel" destination="UCU-3k-wWn" id="K6a-WL-l5G"/>
                         <outlet property="imageView" destination="U0j-hd-obX" id="XIO-fZ-buI"/>
                         <outlet property="textLabel" destination="9mO-Rv-K12" id="FCW-VC-gfv"/>
