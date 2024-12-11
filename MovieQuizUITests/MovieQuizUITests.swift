@@ -28,7 +28,7 @@ class MovieQuizUITests: XCTestCase {
         sleep(3)
         let firstPoster = app.images["Poster"]
         let firstPosterData = firstPoster.screenshot().pngRepresentation
-        
+        app.buttons["No"].tap()
         sleep(3)
         let indexLabe = app.staticTexts["Index"]
         let secondPoster = app.images["Poster"]
